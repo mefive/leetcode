@@ -5,6 +5,10 @@ function multiply(num1, num2) {
     let arr = [];
     let carry = 0;
 
+    if (num1[i] === 0) {
+      continue;
+    }
+
     for (let j = num2.length - 1; j >= 0; j--) {
       const m = num1[i] * num2[j] + carry;
       carry = Math.floor(m / 10);
@@ -43,7 +47,19 @@ function multiply(num1, num2) {
     str = (sum % 10) + str;
   }
 
-  return str;
+  str = carry + str;
+
+  let start = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    start = i;
+
+    if (str[i] !== '0') {
+      break;
+    }
+  }
+
+  return str.slice(start, str.length);
 }
 
 module.exports = multiply;
